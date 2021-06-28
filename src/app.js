@@ -163,18 +163,42 @@ function changeSrcForLightboxImg(src, alt){
 };
 
 window.addEventListener("keydown", slick);
-const galleryLength = gallery.length -1;
+const galleryLength = galleryItems.length -1;
 
-function slick(e) {
-  if(e.code === "ArrowLeft"){
-    indexImg -=1;
-    if (indexImg < 0) indexImg = galleryLength;
+// function slick(e) {
+//   if(e.code === "ArrowLeft"){
+//     indexImg -=1;
+//     if (indexImg < 0) indexImg = galleryLength;
+//   }
+//   if (e.code === "ArrowRight"){
+//     indexImg +=1;
+//     if(indexImg > galleryLength) indexImg = 0;
+//   }
+//   const item = gallery[indexImg];
+//   changeSrcForLightboxImg(item.original, item.description);
+// };
+// console.log(item.original)
+
+function onArrowRight(){
+  if(currentIndex +1 > galleryLength){
+    currentIndex = 0;
+  }else {
+    currentIndex += 1;
   }
-  if (e.code === "ArrowRight"){
-    indexImg +=1;
-    if(indexImg > galleryLength) indexImg = 0;
+  lightBoxImgContent(
+    galleryItems[currentIndex].original,
+    galleryItems[currentIndex].description,
+  );
+}
+
+function onArrowLest() {
+  if (currentIndex - 1 < 0) {
+    currentIndex = galleryLength;
+  } else {
+    currentIndex -= 1;
   }
-  const item = gallery[indexImg];
-  changeSrcForLightboxImg(item.original, item.description);
-};
-console.log(item.original)
+  lightBoxImgContent(
+    galleryItems[currentIndex].original,
+    galleryItems[currentIndex].description,
+  );
+}
